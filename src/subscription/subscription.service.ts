@@ -1,26 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
+import { Subscription, SubscriptionDocument } from './entities/subscription.entity';
 
 @Injectable()
 export class SubscriptionService {
-  create(createSubscriptionDto: CreateSubscriptionDto) {
-    return 'This action adds a new subscription';
+
+  constructor(@InjectModel(Subscription.name) private subscriptionModel: Model<SubscriptionDocument>) {}
+
+  async create(createSubscriptionDto: CreateSubscriptionDto) : Promise <Subscription> {
+    const createdSubscription = new this.subscriptionModel(createSubscriptionDto);
+    return createdSubscription.save();
   }
 
   findAll() {
-    return `This action returns all subscription`;
+    return this.subscriptionModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} subscription`;
+  findOne(id: string) {
+    return this.subscriptionModel.findById(id);
   }
 
-  update(id: number, updateSubscriptionDto: UpdateSubscriptionDto) {
-    return `This action updates a #${id} subscription`;
+  update(id: string, updateSubscriptionDto: UpdateSubscriptionDto) {
+    return this.subscriptionModel.findByIdAndUpdate({
+      _id:id,
+    },{
+      $set: updateSubscriptionDto,
+    }, {
+      new:true,
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} subscription`;
+  remove(id: string) {
+    return this.subscriptionModel.deleteOne({
+      _id: id,
+    }).exec()
   }
 }
