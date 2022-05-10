@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Redirect, Res } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
+import { Response } from 'express';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
 
@@ -12,7 +13,7 @@ export class SubscriptionController {
     return this.subscriptionService.create(createSubscriptionDto);
   }
 
-  @Get()
+  @Get('all')
   findAll() {
     return this.subscriptionService.findAll();
   }
@@ -30,5 +31,10 @@ export class SubscriptionController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.subscriptionService.remove(id);
+  }
+
+  @Get()
+  root(@Res() res: Response) {
+    return res.render('front/home')
   }
 }

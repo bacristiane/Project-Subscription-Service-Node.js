@@ -1,0 +1,41 @@
+* {
+  font-family: sans-serif;
+
+}
+
+.btn1-style {
+  color: #1f40e6; 
+  border: 2px solid #1f40e6; 
+  border-radius: 0;
+  font-weight: 700;
+}
+
+.btn1-style:hover{
+  background-color: #1f40e6;
+  color: #fff
+}
+
+.btn2-style {
+  border-radius: 0;
+  font-weight: 700;
+  background-color: #1f40e6;
+  color: #fff;
+  width:100%;
+  margin-bottom: 1em;
+  
+}
+
+.btn2-style:hover{
+  background-color: #fff;
+  color: #1f40e6;
+  border: solid 2px #1f40e6;
+}
+
+.price{
+  color: #212326;
+  font-size: 1.75em;
+  font-weight: 700;
+  justify-items:center;
+  margin-bottom: .5em;
+}
+
