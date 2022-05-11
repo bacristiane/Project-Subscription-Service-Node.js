@@ -9,8 +9,6 @@ export class PaymentTypePix implements IPaymentType {
     
     payS(paymentDetails : any) {
 
-
-        return "pagando com pix"
     }
 
 }

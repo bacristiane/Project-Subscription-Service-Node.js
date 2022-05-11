@@ -4,9 +4,11 @@ import { SubscriptionController } from './subscription.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Subscription, SubscriptionSchema } from './entities/subscription.entity';
 import { requiresAuth } from 'express-openid-connect';
+import { PaymentModule } from 'src/payment/payment.module';
+import { PaymentService } from 'src/payment/payment.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Subscription.name, schema: SubscriptionSchema }])],
+  imports: [PaymentModule, MongooseModule.forFeature([{ name: Subscription.name, schema: SubscriptionSchema }])],
   controllers: [SubscriptionController],
   providers: [SubscriptionService]
 })

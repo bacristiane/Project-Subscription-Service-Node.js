@@ -20,6 +20,7 @@ export class PaymentService {
 
 
   pay(paymentDetails : any){
+    console.log(paymentDetails)
     const paymentProcessor = this.paymentTypesMap.get(paymentDetails.type)
     if (paymentProcessor) return paymentProcessor.payS(paymentDetails)
     else throw new Error("can't handle that payment type")

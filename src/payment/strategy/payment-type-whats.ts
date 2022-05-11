@@ -9,7 +9,6 @@ export class PaymentTypeWhats implements IPaymentType {
     
     payS(paymentDetails : any) {
 
-        return "pagando com whatsapp"
     }
 
 }

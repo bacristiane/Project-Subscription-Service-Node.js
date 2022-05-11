@@ -9,8 +9,6 @@ export class PaymentTypeCreditCard implements IPaymentType {
     
     payS(paymentDetails : any) {
 
-
-        return "pagando com creditcard"
     }
 
 }

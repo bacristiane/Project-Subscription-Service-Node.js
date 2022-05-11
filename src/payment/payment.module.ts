@@ -13,6 +13,8 @@ import { PaymentTypeWhats } from './strategy/payment-type-whats';
     provide: 'PAYMENT_TYPE',
     useFactory: (...payments: IPaymentType[]) => payments,
     inject: [PaymentTypeCreditCard, PaymentTypePix, PaymentTypeWhats]
-  }]
+  }],
+  exports: [PaymentService]
+
 })
 export class PaymentModule {}

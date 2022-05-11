@@ -4,6 +4,7 @@
         featured content or information.</p>
 
     <div class="card-deck">
+        {{!-- Free Plan --}}
         <div class="card text-center shadow p-3 mb-5 bg-white rounded-0 border-0" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Free</h5>
@@ -12,7 +13,7 @@
                     <span>$</span>
                     <span>0</span>
                 </div>
-                <a href="#" class="btn btn2-style" data-toggle="modal" data-target="#exampleModalCenter">Start now</a>
+                <a href="#" class="btn btn2-style" data-toggle="modal" data-target="#FreePlan">Start now</a>
                 <p>
                     <a style="color: #1f40e6" data-toggle="collapse" href="#collapseExample1" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
@@ -29,6 +30,7 @@
                 </div>
             </div>
         </div>
+        {{!-- Basic Plan --}}
         <div class="card text-center shadow p-3 mb-5 bg-white rounded-0 border-0" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Basic</h5>
@@ -54,6 +56,7 @@
                 </div>
             </div>
         </div>
+        {{!-- Premium Plan --}}
         <div class="card text-center shadow p-3 mb-5 bg-white rounded-0 border-0" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Premium</h5>
@@ -83,8 +86,9 @@
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<!-- Modals -->
+{{!-- Free Plan --}}
+<div class="modal fade" id="FreePlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -108,13 +112,33 @@
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                         data-parent="#accordionExample">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
+                            <form action="/subscription" method="POST">
+                                <div class="form-group">
+                                    <label for="inputEmail4">Full Name</label>
+                                    <input type="text" name="fullname" class="form-control" id="inputEmail4" placeholder="Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress">Number</label>
+                                    <input type="text"  name="number" class="form-control" id="inputAddress"
+                                        placeholder="1234 1234 1234 1234">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-8">
+                                        <label for="inputAddress">Expires</label>
+                                        <input type="text" name="expires" class="form-control" id="inputAddress" placeholder="YY/MM">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputZip">CVC</label>
+                                        <input type="text" name="cvc" class="form-control" id="inputZip" placeholder="123">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="name" value={{user.name}}>
+                                <input type="hidden" name="email" value={{user.email}}>
+                                <input type="hidden" name="picture" value={{user.picture}}>
+                                <input type="hidden" name="subscription" value='free'>
+                                <input type="hidden" name="type" value='creditcard'>
+                                <button type="submit" class="btn btn-primary">Pay</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -162,10 +186,16 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form action="/subscription" method="POST">
+                <div class="modal-footer">
+                    <input type="hidden" name="name" value={{user.name}}>
+                    <input type="hidden" name="email" value={{user.email}}>
+                    <input type="hidden" name="picture" value={{user.picture}}>
+                    <input type="hidden" name="subscription" value='free'>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Criar Subscription">
+                </div>
+            </form>
         </div>
     </div>
 </div>

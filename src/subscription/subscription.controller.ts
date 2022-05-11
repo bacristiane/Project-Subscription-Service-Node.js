@@ -3,17 +3,23 @@ import { SubscriptionService } from './subscription.service';
 import { Request, Response } from 'express';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
+import { PaymentService } from 'src/payment/payment.service';
 
 
 @Controller()
 export class SubscriptionController {
-  constructor(private readonly subscriptionService: SubscriptionService) {}
+  constructor(private readonly subscriptionService: SubscriptionService, private readonly paymentService: PaymentService) {}
 
 
 //functions
   @Post('subscription')
-  create(@Body() createSubscriptionDto: CreateSubscriptionDto) {
-    return this.subscriptionService.create(createSubscriptionDto);
+  create(@Body() paymentDetails: any, createSubscriptionDto: CreateSubscriptionDto, @Res() res: Response) {
+   
+    this.paymentService.pay(paymentDetails)
+    
+    this.subscriptionService.create(createSubscriptionDto)
+    return res.redirect('/profile');
+    
   }
 
   @Get('subscription/all')
@@ -33,7 +39,8 @@ export class SubscriptionController {
 
   @Delete('subscription/:id')
   remove(@Param('id') id: string) {
-    return this.subscriptionService.remove(id);
+    return this.subscriptionService.remove(id)
+    ;
   }
 
   //views
@@ -44,8 +51,20 @@ export class SubscriptionController {
   }
   @Get('plans')
   plans(@Res() res: Response, @Req() req: Request) {
+
+    var user = {}
+
+    if(req.oidc.user) {  user = {name: req.oidc.user.name,
+      email: req.oidc.user.email,
+      picture: req.oidc.user.picture ,
+      subscription: req.body.subscription
+  }}
+      
+    
+    
+
     const isAuthenticated = req.oidc.isAuthenticated()
-        res.render('front/plans', { isAuthenticated })
+        res.render('front/plans', { isAuthenticated, user})
   }
 
   @Get('profile')

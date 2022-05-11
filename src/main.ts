@@ -18,14 +18,16 @@ async function bootstrap() {
   app.setViewEngine('handlebars');
 
   //auth0
+  require('dotenv').config()
   const config = {
     authRequired: false,
     auth0Logout: true,
-    secret: 'b300e53d5313fddda72c854a18daaba257806b564c8db48eea47637f88f75b54',
-    baseURL: 'http://localhost:3000',
-    clientID:'hY4rFeTifhMXAAlOEhqjEka5INqEXVGR',
-    issuerBaseURL: 'https://nodejs-demo.us.auth0.com',
+    secret: process.env.SECRET,
+    baseURL: process.env.BASE_URL,
+    clientID:process.env.CLIENT_ID,
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
   }
+  
   app.use(auth(config));
 
 
