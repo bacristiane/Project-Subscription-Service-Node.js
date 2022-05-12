@@ -12,8 +12,8 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   //handlebars
-  app.useStaticAssets(join(__dirname, '../src', 'public'));
-  app.setBaseViewsDir(join(__dirname, '../src', 'views'));
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.engine('handlebars', hbs.engine())
   app.setViewEngine('handlebars');
 

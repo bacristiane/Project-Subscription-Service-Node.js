@@ -47,14 +47,15 @@ export class SubscriptionController {
   @Get()
   home(@Res() res: Response, @Req() req: Request) {
     const isAuthenticated = req.oidc.isAuthenticated()
-    return res.render('front/home', { isAuthenticated })
+    return res.render('pages/home', { isAuthenticated })
   }
   @Get('plans')
   plans(@Res() res: Response, @Req() req: Request) {
 
     var user = {}
 
-    if(req.oidc.user) {  user = {name: req.oidc.user.name,
+    if(req.oidc.user) {  
+      user = {name: req.oidc.user.name,
       email: req.oidc.user.email,
       picture: req.oidc.user.picture ,
       subscription: req.body.subscription
@@ -64,7 +65,7 @@ export class SubscriptionController {
     
 
     const isAuthenticated = req.oidc.isAuthenticated()
-        res.render('front/plans', { isAuthenticated, user})
+        res.render('pages/plans', { isAuthenticated, user})
   }
 
   @Get('profile')
@@ -78,7 +79,7 @@ export class SubscriptionController {
     }
 
     const isAuthenticated = req.oidc.isAuthenticated()
-    res.render('front/profile', { isAuthenticated, user }, )
+    res.render('pages/profile', { isAuthenticated, user }, )
   }
 
   
